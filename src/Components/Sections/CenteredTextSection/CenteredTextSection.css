@@ -1,0 +1,79 @@
+.centered-text-section {
+  background-color: #C9E2FB;
+  color: #030928;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160px 20px;
+  margin-bottom: 64px;
+
+}
+
+.section-header {
+  font-size: 64px;
+  margin-bottom: 20px;
+  max-width: 1000px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.section-paragraph {
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.centered-text-section {
+  background-color: #C9E2FB;
+  color: #030928;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160px 20px;
+  text-align: center;
+}
+
+.contact-details-div {
+  text-align: center; /* Align text to the left */
+  margin: 20px 0;   /* Add margin to the top and bottom */
+}
+
+.contact-details-div p {
+  margin: 10px 0;   /* Add some space between each paragraph */
+}
+
+.contact-icon-div {
+/* Add some space between the icon and the text */
+  color: #fff;       /* Set the color of the icons */
+  font-size: 18px;   /* Adjust the icon size */
+}
+
+.contact-details-div a {
+  color: #333;       /* Set the color of the links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.contact-details-div a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Styles for mobile screens */
+@media (max-width: 768px) {
+  .centered-text-section {
+    padding: 12px 20px;
+  }
+
+  .section-header {
+    font-size: 24px;
+    margin-top: 48px;
+    text-align: left;
+  }
+
+  .section-paragraph {
+    font-size: 18px;
+    max-width: 90%;
+    text-align: left;
+  }
+}

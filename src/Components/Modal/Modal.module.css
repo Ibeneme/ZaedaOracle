@@ -1,0 +1,289 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000012;
+    /* Semi-transparent black background */
+    backdrop-filter: blur(9px);
+    /* Blur effect */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    /* Start with invisible */
+    animation: fadeIn 0.5s forwards;
+    /* Apply fade-in animation */
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    /* Adjust width as needed */
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1002;
+    /* Slide-in animation */
+    animation: slideInFromLeft 0.5s ease-out;
+    /* Adjust duration as needed */
+}
+
+/* Keyframes for slide-in animation */
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        /* Start from outside the left edge */
+        opacity: 0;
+        /* Start with invisible */
+    }
+
+    to {
+        transform: translateX(0);
+        /* Move to original position */
+        opacity: 1;
+        /* End with visible */
+    }
+}
+
+/* When modalContent has class 'slideOut', apply slide-out animation */
+.modalContent.slideOut {
+    animation: slideOutToLeft 0.5s ease-in forwards;
+    /* Slide out animation */
+}
+
+/* Keyframes for slide-out animation */
+@keyframes slideOutToLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-100%);
+        /* Move out to the left */
+        opacity: 0;
+        /* Fade out */
+    }
+}
+
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #000;
+    /* Black color for heading */
+
+    /* Font family */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-top: 12px;
+    margin-bottom: 1px;
+    color: #000;
+    text-align: left;
+    /* Black color for labels */
+
+    /* Font family */
+}
+
+input,
+textarea {
+    width: 100%;
+    /* Ensure full width */
+    padding: 12px;
+    font-size: 16px;
+    /* Font size for inputs and textarea */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+    /* Font family */
+}
+
+textarea {
+    height: 100px;
+    /* Adjust height if needed */
+    resize: vertical;
+    /* Allow vertical resize */
+}
+
+.error {
+    color: #007bff;
+    font-size: 14px;
+    margin-top: 0px;
+
+    /* Font family */
+}
+
+.submitButton {
+    padding: 14px 16px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, background 0.3s, color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+    background-color: #ffaa00;
+    border: none;
+    /* background: radial-gradient(circle at bottom right, #0366FA, #ffaa00, #0D6EFF); */
+    background-size: 200% 200%;
+    animation: gradientMove 2.8s linear infinite;
+    /* Ensure full width */
+
+    /* Font family */
+}
+
+.submitButton:hover {
+    background-color: #007bff;
+    color: #fff;
+    /* Maintain text color */
+}
+
+.closeButton {
+    position: absolute;
+    top: 16px;
+    right: 0px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    /* Adjust size if needed */
+    cursor: pointer;
+    color: #000;
+    /* Black color for the close icon */
+}
+
+
+
+/* Styles for success modal */
+.successModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.successModalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.successIcon {
+    font-size: 72px;
+    color: #007bff;
+    margin-bottom: 40px;
+    animation: bounce 1s ease infinite;
+}
+
+.successButton {
+    padding: 16px 24px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    /* Ensure full width */
+
+    /* Font family */
+}
+
+.successButton:hover {
+    background: radial-gradient(circle at bottom right, #0366FA, #ffaa00, #0D6EFF);
+    background-size: 200% 200%;
+    animation: gradientMove 4.8s linear infinite;
+    color: #fff;
+    /* Maintain text color */
+}
+
+.adminButton {
+    background-color: transparent;
+    border: none;
+
+    /* Font family */
+    font-size: 14px;
+    text-decoration: underline;
+    color: #007bff;
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}

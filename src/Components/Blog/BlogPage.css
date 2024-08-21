@@ -1,0 +1,119 @@
+.blog-page {
+    /* max-width: 1500px; */
+    margin: auto;
+    background-color: #f4f4f4;
+    margin-top: -24px;
+    padding: 48px;
+    padding-bottom: 240px;
+}
+
+.blog-page-content {
+    border-radius: 24px;
+
+}
+
+.blog-page-content-h1 {
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 75px;
+    color: #030928;
+    text-decoration: overline;
+}
+
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 32px;
+}
+
+.blog-card {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.blog-card-content {
+    padding: 12px;
+    border-radius: 12px;
+    background: #fff;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 12px
+}
+
+.blog-card-content h2 {
+    margin: 0;
+}
+
+.blog-card-content p {
+    margin: 5px 0;
+}
+
+.blog-date {
+    font-size: 0.9rem;
+    color: #7d7d7d;
+}
+
+.blog-image:hover .blog-image {
+    opacity: 0.45;
+    transform: scale(1.05);
+}
+
+.blog-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    /* Hidden by default */
+    transition: opacity 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+    /* Dark overlay for icon visibility */
+    border-radius: 8px;
+}
+
+.blog-image:hover .blog-image-overlay {
+    opacity: 1;
+    /* Show the overlay on hover */
+}
+
+.arrow-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .blog-page {
+        margin: auto;
+        background-color: #ECF5FF;
+        margin-top: 240px;
+        /* Consider adjusting this value for better spacing on mobile */
+        padding: 16px;
+    }
+
+    .blog-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 16px;
+    }
+
+}

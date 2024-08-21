@@ -1,0 +1,132 @@
+/* Navbar.module.css */
+
+.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent background */
+    color: #fff;
+    padding: 10px 20px;
+    backdrop-filter: blur(10px);
+    /* Add blur effect */
+    border-radius: 8px;
+    /* Optional: rounded corners for the glass effect */
+    position: fixed;
+    /* Fix position to keep it at the top */
+    top: 0;
+    /* Align to the top */
+    left: 50%;
+    /* Center horizontally */
+    transform: translateX(-50%);
+    /* Adjust horizontal alignment */
+    width: 90vw;
+    /* Adjust width as needed */
+    z-index: 1000;
+    /* Ensure it sits on top of other elements */
+    margin-top: 24px;
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* Ensure the container uses full width of the navbar */
+}
+
+.logo {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navLink {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.navLink:hover {
+    color: #ddd;
+}
+
+.navActions {
+    display: flex;
+    gap: 10px;
+}
+
+.loginButton,
+.signupButton {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.3s ease;
+}
+
+.loginButton:hover,
+.signupButton:hover {
+    background-color: #0056b3;
+}
+
+.signupButton {
+    background-color: #28a745;
+}
+
+.signupButton:hover {
+    background-color: #218838;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Add blur effect */
+.navbar.blur {
+    filter: blur(5px);
+}
+
+.logoImage {
+    height: 21px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 8px;
+}

@@ -1,0 +1,71 @@
+/* EventsSection.css */
+
+.events-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #FA0C7E25;
+    padding-bottom: 120px;
+}
+
+.header-events,
+.header-events h2 {
+    text-align: left;
+    font-size: 48px;
+    margin-top: 240px;
+
+}
+
+.cards-container {
+    display: flex;
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; */
+    color: #fff;
+    padding-bottom: 120px;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    background-attachment: fixed;
+    /* Parallax effect */
+}
+
+.card-image {
+    width: 100%;
+    height: 600px;
+    /* Adjust as needed */
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+    color: #fff;
+    z-index: 1;
+    /* Ensures text is above the background */
+}
+
+.card-1 {
+    background-color: #FA0C7E;
+    width: 500px;
+    text-align: left;
+    color: #fff
+        /* Light blue */
+}
+
+.card-2 {
+    background-color: #fff0f5;
+    /* Light pink */
+}
+
+.card-content-h3 {
+    font-size: 32px;
+    text-align: left;
+}
+
+.header-events-h2 {
+    font-size: 128px;
+    font-weight: 900;
+    color: #FA0C7E
+}

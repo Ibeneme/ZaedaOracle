@@ -1,0 +1,41 @@
+.rolling-logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+  height: 120px;
+  /* Adjust height as needed */
+  background-color: #0075FF;
+  /* Background color */
+  
+}
+
+.rolling-logos-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.rolling-logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: auto;
+  /* Adjust based on content */
+  padding-left: 16px;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 24px;
+
+}
+
+.rolling-logo-item p {
+  font-weight: 500;
+  font-size: 24px;
+  white-space: nowrap;
+  text-align: center;
+}

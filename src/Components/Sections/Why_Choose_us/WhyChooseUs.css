@@ -1,0 +1,88 @@
+.why-choose-us-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 120px;
+  background-color: #fff;
+  color: #000;
+  gap: 48px
+}
+
+.why-choose-us-section-a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 120px;
+  background-color: #fff;
+  color: #000;
+  gap: 48px;
+  flex-direction: row-reverse;
+}
+
+.why-choose-us-text {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.why-choose-us-text h2 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.why-choose-us-text p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.why-choose-us-image {
+  flex: 1;
+}
+
+.why-choose-us-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .why-choose-us-section {
+    flex-direction: column;
+    text-align: left;
+    padding: 24px;
+  }
+
+  .why-choose-us-section-a {
+    flex-direction: column;
+    text-align: left;
+    padding: 24px;
+  }
+
+  .why-choose-us-text {
+    padding-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .why-choose-us-image {
+    width: 100%;
+  }
+}
+
+.why-choose-us-text ul {
+  list-style-type: none; /* Removes default bullet points */
+  padding-left: 0; /* Removes default padding */
+}
+
+.why-choose-us-text li {
+  margin-bottom: 20px; /* Adds space between list items */
+  font-size: 18px; /* Adjusts the font size */
+  line-height: 1.6; /* Ensures better readability with line spacing */
+}
+
+.why-choose-us-text li strong {
+  display: block; /* Makes the title part of each list item stand out */
+  font-weight: bold;
+  color: #0075ff; /* Highlights the service titles */
+  margin-bottom: 5px; /* Adds space between the title and the description */
+}

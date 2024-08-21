@@ -1,0 +1,99 @@
+/* HorizontalScrollSection.css */
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-weight: 300;
+  }
+  
+  body {
+    overflow-x: hidden; /* Hide horizontal overflow */
+  }
+  
+  a {
+    color: white;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  .full-screen {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  #masthead {
+    position: fixed;
+    display: flex;
+    z-index: 9999;
+  }
+  
+  #masthead a {
+    padding: 1rem 2rem;
+  }
+  
+  #panels #panels-container {
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ddd;
+  }
+  
+  #panels #panels-container .panel {
+    position: relative;
+    min-width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-align: left;
+    border-right: 1px solid #f00;
+  }
+  
+  #panels #panels-container .panel img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  #panels #panels-container .panel .panels-navigation {
+    width: 100%;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  #panels #panels-container .panel .anchor-panel,
+  #panels #panels-container .panel .nav-panel {
+    color: #000;
+    text-transform: uppercase;
+    margin-right: 2rem;
+  }
+  
+  .cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: 600px;
+  }
+  
+  #panel-5 {
+    width: unset;
+    flex: 1 0 auto;
+  }
+  

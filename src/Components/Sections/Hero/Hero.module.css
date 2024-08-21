@@ -1,0 +1,253 @@
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.hero-slide {
+    width: 70%;
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.hero-slide.enter {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.hero-slide.exit {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.arrow-container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 20px;
+}
+
+.arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.arrow:hover {
+    color: #ddd;
+}
+
+
+/* App.css */
+.hero-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #fff;
+    transition: background 0.3s;
+    z-index: 1000;
+
+}
+
+.hero-header.scrolled {
+    background: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px
+}
+
+.hero-header-title {
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 32px;
+}
+
+.hero-header-title.scrolled {
+    font-size: 16px;
+    margin: 0px;
+    padding: 0px
+}
+
+.hero-navbar {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.hero-navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    padding-right: 32px;
+}
+
+.hero-navbar li {
+    margin: 0 15px;
+}
+
+.hero-navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hero-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.hero-dropdown-menu {
+    position: fixed;
+    /* Changed to fixed to cover the whole viewport */
+    top: 65px;
+    /* Start from the top of the viewport */
+    left: 0;
+    /* Start from the left of the viewport */
+    width: 100vw;
+    /* Full width of the viewport */
+    height: fit-content;
+    /* Full height of the viewport */
+    background: #fff;
+    border: none;
+    /* Removed border to cover the whole screen */
+    box-shadow: none;
+    /* Removed shadow for a full-screen effect */
+    display: none;
+    list-style: none;
+    padding: 16px;
+    flex-direction: column;
+    color: #000;
+    overflow-y: auto;
+    /* Allows scrolling if content overflows */
+    z-index: 1000;
+    /* Ensures it appears above other content */
+}
+
+.hero-dropdown-menu {
+    position: absolute;
+    top: 45px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 100vw;
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+}
+
+.hero-dropdown-menu-grid {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.dropdown-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.dropdown-item-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-item-content p {
+    margin: 0;
+}
+
+.hero-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.hero-header.scrolled {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.hero-navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+.hero-navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-navbar ul li {
+    margin-left: 20px;
+}
+
+.hero-navbar ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+}
+
+.hero-navbar ul li a:hover {
+    color: #ddd;
+}
+
+/* Add styles for other components */

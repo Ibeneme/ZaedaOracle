@@ -1,0 +1,64 @@
+/* animatedTextStyles.css */
+
+.lastsection-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #030928;
+    padding: 140px 48px;
+}
+
+.lastsection-Text {
+    font-size: 8vw;
+    letter-spacing: -0.01em;
+    line-height: 100%;
+    margin: 0;
+    width: 100%;
+    color: rgba(182, 182, 182, 0.2);
+    background: linear-gradient(to right, #b6b6b6, #b6b6b6) no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 0%;
+    transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
+    border-bottom: 1px solid #2f2b28;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+}
+
+.lastsection-Text:hover>.lastsection-Span {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+    /* 
+.lastsection-Span {
+     position: absolute;
+    width: 100%;
+    height: 100%;
+ 
+    color: #0d0d0d;
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+    transform-origin: center;
+    transition: all cubic-bezier(0.1, 0.5, 0.5, 1) 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+/* Hover effect */
+/* .lastsection-Span:hover {
+    transform: scale(1.2);
+} */
+
+/* Media queries */
+@media (max-width: 768px) {
+    .lastsection-Container {
+        padding: 48px 12px;
+    }
+
+    .lastsection-Text {
+        font-size: 18vw;
+    }
+}
