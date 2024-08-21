@@ -43,16 +43,37 @@ const CenteredTextSectionContact: React.FC = () => {
               alignItems: "center",
             }}
           >
+            <FaMapMarkerAlt className="contact-icon-div" />{" "}
+          </div>
+          110 W Randol Mill Road, Suite 240, Arlington, Texas, 76011.
+        </p>
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#030928",
+              padding: 12,
+              borderRadius: 4,
+              width: "fit-content",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <FaEnvelope className="contact-icon-div" />{" "}
           </div>
-          Email us at{" "}
           <a
             href="mailto:info@zaedaoracle.com"
             style={{ fontWeight: 900, color: "#030928" }}
           >
             info@zaedaoracle.com
           </a>{" "}
-          for any inquiries.
         </p>
         <p
           style={{
@@ -75,37 +96,12 @@ const CenteredTextSectionContact: React.FC = () => {
           >
             <FaPhone className="contact-icon-div" />{" "}
           </div>
-          Call us at{" "}
           <a
             href="tel:+234111848399"
             style={{ fontWeight: 900, color: "#030928" }}
           >
             +234111848399
           </a>{" "}
-          to speak with a member of our team.
-        </p>
-        <p
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 12,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#030928",
-              padding: 12,
-              borderRadius: 4,
-              width: "fit-content",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <FaMapMarkerAlt className="contact-icon-div" />{" "}
-          </div>
-          110 W Randol Mill Road, Suite 240, Arlington, Texas, 76011.
         </p>
       </div>
       <button className="cta-button" onClick={openModal}>
