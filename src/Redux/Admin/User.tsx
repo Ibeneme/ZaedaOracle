@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { baseApiUrl } from "../Waiting/waitingList"; // Adjust this path if necessary
 
 // Define the TypeScript interfaces for user data and responses
