@@ -71,6 +71,7 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             and our team will get back to you promptly.
           </p>
           <form onSubmit={formik.handleSubmit}>
+            <br />{" "}
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 Name
@@ -86,6 +87,7 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <div className="text-danger">{formik.errors.name}</div>
               ) : null}
             </div>
+            <br />{" "}
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
                 Email
@@ -101,6 +103,7 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 <div className="text-danger">{formik.errors.email}</div>
               ) : null}
             </div>
+            <br />{" "}
             <div className="mb-3">
               <label htmlFor="subject" className="form-label">
                 Subject
@@ -113,6 +116,7 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 {...formik.getFieldProps("subject")}
               />
             </div>
+            <br />{" "}
             <div className="mb-3">
               <label htmlFor="message" className="form-label">
                 Message
@@ -139,7 +143,6 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 Submit
               </Button>
             )}
-
             {status === "failed" && (
               <div className="text-danger mt-2">{error}</div>
             )}
