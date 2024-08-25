@@ -48,7 +48,7 @@ const HeroHeader: React.FC = () => {
           className={`hero-header-title ${
             showNavbar ? "scrolled" : "scrolled"
           }`}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
         >
           Zaeda Oracle
         </h1>
@@ -100,7 +100,7 @@ const HeroHeader: React.FC = () => {
           </li>
           <li
             onClick={openModal}
-            className={isActive("/") ? "active-route" : ""}
+            //className={isActive("/") ? "active-route" : ""}
           >
             Contact Us
           </li>
