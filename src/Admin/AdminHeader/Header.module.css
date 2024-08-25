@@ -1,0 +1,76 @@
+/* Header.module.css */
+
+/* Base header styles */
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffffff;
+    /* White background for desktop */
+    color: #000000;
+    /* Black text for desktop */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    /* Center items horizontally in mobile view */
+    align-items: center;
+    /* Center items vertically in mobile view */
+
+    z-index: 1000;
+    /* Ensure the header is above other content */
+    position: relative;
+    /* To ensure z-index works correctly */
+    gap: 48px;
+    padding-top: 24px;
+}
+
+/* Mobile view styles */
+.mobileHeader {
+    display: flex;
+    background-color: #000000;
+    /* Black background for mobile */
+    color: #ffffff;
+    /* White text for mobile */
+    position: fixed;
+    /* Fix to the bottom of the screen */
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    justify-content: space-around;
+    padding: 12px;
+    font-size: 12px;
+    /* Ensure the header is above other content */
+}
+
+/* Navigation item styles */
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    justify-content: center;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+.p {
+    font-size: 14px;
+}
+
+/* Active state styles */
+.activeNavItem {
+    color: #007bff; /* Blue color for active state */
+}
+
+.activeIcon {
+    color: #007bff; /* Blue color for active state */
+}
+
+.activeText {
+    color: #007bff; /* Blue color for active state */
+}

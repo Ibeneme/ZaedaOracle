@@ -1,0 +1,114 @@
+/* LegalInsights.module.css */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+
+.item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    color: #fff;
+    width: fit-content;
+    border-radius: 4px;
+
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.iconsdiv {
+    cursor: pointer;
+    background-color: #5B86FF19;
+    width: fit-content;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.iconsdivdelete {
+    cursor: pointer;
+    background-color: #ff000022;
+    width: fit-content;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.viewbutton {
+    color: #5B86FF;
+}
+
+.imagePreview {
+
+    width: 100%;
+    max-height: 500px
+}
+
+.editicon {
+    color: #5B86FF;
+}
+
+.deleteicon {
+    color: #ff0000;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.viewcontent {
+    white-space: pre-wrap;
+    /* Preserves line breaks and spaces */
+}
+
+.changeable {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.changeable img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.viewModal .modal-dialog {
+    max-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+}
+
+.viewModal .modal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+}

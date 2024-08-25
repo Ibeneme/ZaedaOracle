@@ -1,48 +1,32 @@
 import React, { useState } from "react";
 import "./FAQPage.css";
-//import BlogHero from "../../Blog/BlogHero/BlogHero";
 
 const FAQPage: React.FC = () => {
   const faqs = [
     {
-      question: "What is Lorem Ipsum?",
+      question: "How Do You Bill for your Legal services?",
       answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "We have different packages. Once you send us an email, you will be sent the different packages from which you can choose which suits you best.",
     },
     {
-      question: "What is Lorem Ipsum?",
+      question: "Will more than one lawyer be working on my case?",
       answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "At every point, a lawyer is assigned to you. However, if your package requires more than one, you will be notified.",
     },
     {
-      question: "What is Lorem Ipsum?",
+      question: "What are the services of the Company?",
       answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "We carry out legal services, business management, and provide creative solutions to our clients in the Creative Industry.",
     },
     {
-      question: "What is Lorem Ipsum?",
+      question: "Does your Company provide management services?",
       answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "Yes, depending on your retainer package, we provide business management services to our clients, including looking for avenues to expand your brand.",
     },
     {
-      question: "What is Lorem Ipsum?",
+      question: "Must every meeting be physical?",
       answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    },
-    {
-      question: "What is Lorem Ipsum?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    },
-    {
-      question: "What is Lorem Ipsum?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    },
-    {
-      question: "What is Lorem Ipsum?",
-      answer:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "No, every meeting does not have to be physical. One of our strengths is adjusting to the digital age, allowing us to provide means for meetings to be held virtually.",
     },
   ];
 
@@ -56,11 +40,8 @@ const FAQPage: React.FC = () => {
 
   return (
     <div>
-      {/* <BlogHero title="Frequently Asked Questions" />
-       */}
-
       <div className="faq-page">
-        <h1 style={{ fontFamily: "var(--fontFamily" }}>
+        <h1 style={{ fontFamily: "var(--fontFamily)" }}>
           Frequently Asked Questions
         </h1>
         <br />

@@ -1,15 +1,34 @@
-import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../Redux/store";
+import { fetchLegalInsights } from "../../Redux/Admin/legalInsightsSlice";
 import "./LegalInsights.css";
 import fozaImage from "../../assets/images/scale.jpg";
 import BlogHero from "../Blog/BlogHero/BlogHero";
-import { FaChevronRight } from "react-icons/fa"; // Import Chevron icon
+import { FaChevronRight } from "react-icons/fa";
+import { format } from "date-fns";
+import { enGB } from "date-fns/locale";
+import { InsightType } from "./LegalInsights.types";
 
 const LegalInsights: React.FC = () => {
-  const navigate = useNavigate(); // Initialize navigate
-  const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
+  const { insights, status, error } = useSelector(
+    (state: RootState) => state.legalInsights
+  );
+  const [localError, setLocalError] = useState<string | null>(null);
+  const overlayRefs = useRef<Map<string, HTMLDivElement | null>>(new Map());
 
   useEffect(() => {
+    dispatch(fetchLegalInsights())
+      .then((response) => {
+        console.log(response, "response");
+      })
+      .catch((err) => {
+        setLocalError(err.message || "An error occurred");
+      });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -20,7 +39,7 @@ const LegalInsights: React.FC = () => {
           }
         });
       },
-      { threshold: 0.5 } // Trigger when 50% of the item is in view
+      { threshold: 0.5 }
     );
 
     overlayRefs.current.forEach((ref) => {
@@ -32,56 +51,62 @@ const LegalInsights: React.FC = () => {
         if (ref) observer.unobserve(ref);
       });
     };
-  }, []);
+  }, [dispatch]);
 
-  const handleReadMore = (title: string) => {
-    // Navigate to a detailed page with the title as part of the URL or query parameters
-    navigate(`/legal-insights/${title.replace(/\s+/g, "-").toLowerCase()}`);
+  const handleReadMore = (insight: InsightType) => {
+    navigate(`/legal-insight-details`, {
+      state: { insight },
+    });
   };
 
-  const legalInsightsData = [
-    {
-      title: "Copyright Protection",
-      description: "Learn about how to protect your intellectual property.",
-      image: fozaImage,
-    },
-    {
-      title: "Contract Negotiations",
-      description: "Understand the intricacies of contract law.",
-      image: fozaImage,
-    },
-    {
-      title: "Film Financing",
-      description: "Explore the legal aspects of financing your film.",
-      image: fozaImage,
-    },
-    // Add more insights as needed
-  ];
+  const formatDate = (date?: Date) => {
+    if (!date) return "Date not available";
+    return format(date, "do MMMM yyyy, hh:mm a", { locale: enGB });
+  };
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (localError || error) {
+    return <div>Error: {localError || error}</div>;
+  }
 
   return (
     <div>
       <BlogHero title="Legal Insights" />
       <br />
       <div style={{ padding: "150px 0px" }}>
-        <h2 style={{ textAlign: "center", fontSize: "4rem" }}>
-          Legal Insights
-        </h2>
         <div className="legal-insights-grid">
-          {legalInsightsData.map((insight, index) => (
+          {insights.map((insight) => (
             <div
-              key={index}
+              key={insight._id}
               className="legal-insight-item"
-              style={{ backgroundImage: `url(${insight.image})` }}
+              style={{ backgroundImage: `url(${insight.image || fozaImage})` }}
             >
               <div
                 className="overlay"
-                ref={(el) => (overlayRefs.current[index] = el)}
+                ref={(el) => {
+                  if (el) {
+                    overlayRefs.current.set(insight._id, el);
+                  } else {
+                    overlayRefs.current.delete(insight._id);
+                  }
+                }}
               >
                 <h1>{insight.title}</h1>
-                <p>{insight.description}</p>
+                <p>
+                  {insight.description.slice(0, 180)}
+                  {insight.description.length > 180 ? "..." : ""}
+                </p>
+                <p>
+                  <strong>Created:</strong> {formatDate(insight.dateCreated)}
+                </p>
+                <p>
+                  <strong>Updated:</strong> {formatDate(insight.dateUpdated)}
+                </p>
                 <button
                   className="read-more-button"
-                  onClick={() => handleReadMore(insight.title)}
+                  onClick={() => handleReadMore(insight)}
                 >
                   Read More <FaChevronRight />
                 </button>

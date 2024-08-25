@@ -1,64 +1,82 @@
 import React, { useState } from "react";
-//import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Modal, Button, Spinner } from "react-bootstrap"; // Import Spinner for the loader
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Login.module.css";
-import { LoginFormValues } from "./Login.types";
-// import { adminLogin } from "../../Redux/Admin/Admin";
-// import { ThunkDispatch } from "@reduxjs/toolkit";
-// import { RootState } from "../../Redux/store";
-// import { useNavigate } from "react-router-dom";
+import { AppDispatch, RootState } from "../../Redux/store";
+import { login, sendOtp } from "../../Redux/Admin/Admin"; // Assuming sendOtp is imported from the same module
 
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorResponse, setError] = useState<string | []>("");
-  //const navigate = useNavigate();
-  //const dispatch = useDispatch<ThunkDispatch<RootState, undefined, any>>();
+  const [modalEmail, setModalEmail] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [resetEmailErrors, setResetEmailErrors] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // New state for handling submission loader
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const [errorLogin, setErrorLogin] = useState("");
+  const { loading, error } = useSelector((state: RootState) => state.admin);
 
-  // Check for token on component mount
-  // useEffect(() => {
-  //   const token = localStorage.getItem('adminToken');
-  //   if (token) {
-  //     navigate('/users'); // Redirect to the Users page if token exists
-  //   }
-  // }, [navigate]);
-
-  const initialValues: LoginFormValues = { email: "", password: "" };
+  const initialValues = { email: "", password: "" };
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters long")
-      .matches(/[a-z]/, "Must include a lowercase letter")
-      .matches(/[0-9]/, "Must include a number")
-      .required("Required"),
+    password: Yup.string().required("Password is required"),
   });
 
-  const handleSubmit = (values: LoginFormValues) => {
-    setError("");
-    setLoading(true);
-    console.log(values); // Start loader
-    // dispatch(adminLogin(values))
-    //   .unwrap()
-    //   .then((result) => {
-    //     setLoading(false); // Stop loader
-    //     if (result.message === "Invalid credentials") {
-    //       setError("Invalid credentials");
-    //     } else if (result.token) {
-    //       localStorage.setItem('adminToken', result.token); // Store the token in localStorage
-    //       navigate('/users'); ; // Redirect to the Users page upon successful login
-    //     } else {
-    //       console.error("Unexpected result:", result);
-    //     }
-    //   })
-    //   .catch((error: any) => {
-    //     setLoading(false); // Stop loader
-    //     const errorMessage = error.message || "An error occurred";
-    //     console.error("Login failed:", errorMessage);
-    //     setError(errorMessage);
-    //   });
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    setErrorLogin("");
+    setIsSubmitting(true); // Start loader
+
+    try {
+      const response = await dispatch(login(values)).unwrap();
+      console.log(response, "response");
+      localStorage.setItem("admin_access_token", response.token);
+      navigate("/news-insights-admin");
+    } catch (err: any) {
+      setErrorLogin(err?.message);
+      console.error(err);
+    } finally {
+      setIsSubmitting(false); // Stop loader
+    }
+  };
+
+  const handleModalSubmit = () => {
+    setResetEmailErrors(null);
+    setIsSubmitting(true); // Start loader
+
+    const emailValidationSchema = Yup.string()
+      .email("Invalid email address")
+      .required("Email is required");
+
+    emailValidationSchema
+      .validate(modalEmail)
+      .then(() => {
+        dispatch(sendOtp({ email: modalEmail }))
+          .unwrap()
+          .then((response) => {
+            console.log(response, "OTP sent successfully");
+            if (response.message === "OTP sent to your email") {
+              navigate("/reset-password", { state: { email: modalEmail } });
+              setShowModal(false);
+            }
+          })
+          .catch((err) => {
+            setResetEmailErrors(
+              err?.message || "Failed to send OTP. Please try again."
+            );
+          })
+          .finally(() => {
+            setIsSubmitting(false); // Stop loader
+          });
+      })
+      .catch((err) => {
+        setResetEmailErrors(err.message);
+        setIsSubmitting(false); // Stop loader in case of validation error
+      });
   };
 
   return (
@@ -94,6 +112,7 @@ const LoginPage: React.FC = () => {
                     type="email"
                     className={styles.formInput}
                     placeholder="Enter an email address"
+                    disabled={isSubmitting} // Disable input when submitting
                   />
                 </div>
                 <ErrorMessage
@@ -115,11 +134,13 @@ const LoginPage: React.FC = () => {
                     type={showPassword ? "text" : "password"}
                     className={styles.formInput}
                     placeholder="Enter a Password"
+                    disabled={isSubmitting} // Disable input when submitting
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className={styles.togglePassword}
+                    disabled={isSubmitting} // Disable button when submitting
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
@@ -139,16 +160,14 @@ const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 className={styles.submitButton}
-                disabled={loading}
+                disabled={loading || isSubmitting} // Disable submit button when submitting
               >
-                {loading ? "Logging in..." : "Login"}
+                {loading || isSubmitting ? "Logging in..." : "Login"}
               </button>
-              {errorResponse ? (
+              {(error || errorLogin) && (
                 <div
                   style={{
-                    backgroundColor: errorResponse
-                      ? "#ff000024"
-                      : "transparent",
+                    backgroundColor: "#ff000024",
                     fontSize: 16,
                     padding: 16,
                     marginTop: 24,
@@ -156,19 +175,82 @@ const LoginPage: React.FC = () => {
                   }}
                   className={styles.errorMessage}
                 >
-                  {errorResponse}
+                  {error && typeof error === "string" && error}
+                  {errorLogin && typeof errorLogin === "string" && errorLogin}
                 </div>
-              ) : null}
+              )}
             </Form>
           )}
         </Formik>
         <br />
+        <Button
+          variant="link"
+          onClick={() => setShowModal(true)}
+          style={{ color: "#000" }}
+          disabled={isSubmitting} // Disable Forgot Password button when submitting
+        >
+          Forgot Password?
+        </Button>
         {loading && (
           <div className={styles.loader}>
             <div className={styles.spinner}></div>
           </div>
         )}
       </div>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reset Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className={styles.formGroup}>
+            <label htmlFor="resetEmail">Email:</label>
+            <input
+              id="resetEmail"
+              type="email"
+              className={styles.formInput}
+              placeholder="Enter your email"
+              value={modalEmail}
+              onChange={(e) => setModalEmail(e.target.value)}
+              disabled={isSubmitting} // Disable input when submitting
+            />
+            {resetEmailErrors && (
+              <div className={styles.errorMessage}>{resetEmailErrors}</div>
+            )}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowModal(false)}
+            disabled={isSubmitting} // Disable Cancel button when submitting
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            style={{
+              backgroundColor: "#ffaa00",
+              borderColor: "#ffaa00",
+              padding: "14px 24px",
+            }}
+            onClick={handleModalSubmit}
+            disabled={!modalEmail || isSubmitting} // Disable Submit button when submitting
+          >
+            {isSubmitting ? (
+              <Spinner
+                animation="border"
+                role="status"
+                size="sm"
+                aria-hidden="true"
+                as="span"
+              />
+            ) : (
+              "Submit"
+            )}
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

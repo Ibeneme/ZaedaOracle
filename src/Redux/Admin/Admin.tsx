@@ -1,85 +1,176 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
-import { baseApiUrl } from "../Waiting/waitingList"; // Ensure this path is correct
+import axios from "axios";
+import { BASE_URL } from "../baseUrl";
+//const BASE_URL = "http://localhost:3000/api/admin";
 
-// Define the TypeScript interface for the payload
-interface AdminLoginPayload {
-  email: string;
-  password: string;
+// Utility function to get error message
+function getErrorMessage(error: unknown): string {
+  if (axios.isAxiosError(error)) {
+    return error.response?.data || "An error occurred";
+  }
+  return "An unexpected error occurred";
 }
 
-// Define the TypeScript interface for the response data
-interface AdminLoginResponse {
-  token: string;
-  message: any
-  // Add other fields if needed
-}
+// Thunks
 
-// Define the TypeScript interface for the state
-interface AdminInterfaceState {
-  loading: boolean;
-  error: string | null;
-  success: AdminLoginResponse | null; // Adjust this type based on what success contains
-}
-
-// Define the initial state
-const initialState: AdminInterfaceState = {
-  loading: false,
-  error: null,
-  success: null,
-};
-
-// Define the adminLogin thunk
-export const adminLogin = createAsyncThunk<
-  AdminLoginResponse, // The type of the return value
-  AdminLoginPayload
->(
-  'AdminInterface/adminLogin',
-  async (payload: AdminLoginPayload) => {
-    const { email, password } = payload;
-
+export const login = createAsyncThunk(
+  "adminUser/login",
+  async (
+    { email, password }: { email: string; password: string },
+    thunkAPI
+  ) => {
     try {
-      const response = await axios.post(
-        `${baseApiUrl}/api/v1/admin/login`,
-        { email, password }
-      );
-      console.log(response, 'Admin Login Response');
-      return response.data; // Assuming response.data contains the token
+      console.log(email, password, "email, password");
+      const response = await axios.post(`${BASE_URL}/api/admin/login`, {
+        email,
+        password,
+      });
+      return response.data;
     } catch (error) {
-      console.error(error, 'Admin Login Error');
-      // Return a default error message or error data
-      return (error as AxiosError).response?.data || 'An error occurred';
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
     }
   }
 );
 
-// Define the slice
-const AdminInterfaceSlice = createSlice({
-  name: "AdminInterface",
+export const sendOtp = createAsyncThunk(
+  "adminUser/sendOtp",
+  async ({ email }: { email: string }, thunkAPI) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/api/admin/send-otp`, {
+        email,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  "adminUser/changePassword",
+  async (
+    {
+      email,
+      otp,
+      newPassword,
+    }: { email: string; otp: string; newPassword: string },
+    thunkAPI
+  ) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/admin/change-password`,
+        {
+          email,
+          otp,
+          newPassword,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const deleteAdmin = createAsyncThunk(
+  "adminUser/deleteAdmin",
+  async (id: string, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/admin/delete-admin/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+// Initial state
+interface AdminUserState {
+  loading: boolean;
+  error: string | null;
+  user: any | null;
+  otpSent: boolean;
+  passwordChanged: boolean;
+  adminDeleted: boolean;
+}
+
+const initialState: AdminUserState = {
+  loading: false,
+  error: null,
+  user: null,
+  otpSent: false,
+  passwordChanged: false,
+  adminDeleted: false,
+};
+
+// Slice
+const adminUserSlice = createSlice({
+  name: "adminUser",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(adminLogin.pending, (state) => {
+      // Login
+      .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(adminLogin.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.success = action.payload;
-
-        // Store the token in localStorage
-        if (action.payload.token) {
-          localStorage.setItem('adminToken', action.payload.token);
-          // Optionally handle authorization or redirect here
-          // e.g., navigate('/dashboard'); or update the app state
-        }
+        state.user = action.payload;
       })
-      .addCase(adminLogin.rejected, (state, action) => {
+      .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ? (action.payload as string) : 'An error occurred';
+        state.error = action.payload as string;
+      })
+
+      // Send OTP
+      .addCase(sendOtp.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.otpSent = false;
+      })
+      .addCase(sendOtp.fulfilled, (state) => {
+        state.loading = false;
+        state.otpSent = true;
+      })
+      .addCase(sendOtp.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // Change Password
+      .addCase(changePassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.passwordChanged = false;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.loading = false;
+        state.passwordChanged = true;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+
+      // Delete Admin
+      .addCase(deleteAdmin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.adminDeleted = false;
+      })
+      .addCase(deleteAdmin.fulfilled, (state) => {
+        state.loading = false;
+        state.adminDeleted = true;
+      })
+      .addCase(deleteAdmin.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-export default AdminInterfaceSlice.reducer;
+export default adminUserSlice.reducer;

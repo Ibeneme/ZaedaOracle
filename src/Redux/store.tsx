@@ -1,12 +1,14 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import waitingListReducer from "./Waiting/waitingList";
-import adminInterfaceReducer from "./Admin/Admin";
-import userSliceReducer from "./Admin/User";
+import adminReducer from "./Admin/Admin";
+import legalInsightsReducer from "./Admin/legalInsightsSlice";
+import newsInsightsReducer from "./Admin/newsInsightsSlice";
+import contactReducer from "./Admin/contactUs";
 
 const rootReducer = combineReducers({
-  waitingList: waitingListReducer,
-  adminInterface: adminInterfaceReducer,
-  userSlice: userSliceReducer,
+  admin: adminReducer,
+  legalInsights: legalInsightsReducer,
+  newsInsights: newsInsightsReducer,
+  contact: contactReducer,
 });
 
 export const store = configureStore({

@@ -1,7 +1,7 @@
 /* BlogHero.css */
 .blog-hero {
     position: relative;
-    background: url('../../../assets/images/main.jpg') no-repeat center center fixed;
+    background: url('../../../assets/images/mission.jpg') no-repeat center center fixed;
     background-size: cover;
     background-attachment: fixed; /* This enables the parallax effect */
     background-position: center center;
