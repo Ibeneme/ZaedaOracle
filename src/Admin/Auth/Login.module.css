@@ -63,7 +63,7 @@
 
 .submitButton {
   padding: 0.5rem;
-  background-color: #ffaa00;
+  background-color: #C4D92E;
   border: none;
   border-radius: 4px;
   color: white;
@@ -75,11 +75,10 @@
 
 .passwordHint {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: #C4D92E;
   margin-top: 0.5rem;
-  background-color: #ffaa0014;
+  background-color: #000000;
   padding: 12px;
-  color: #ffaa00;
   font-size: 14px;
 }
 

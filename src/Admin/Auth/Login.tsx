@@ -87,7 +87,7 @@ const LoginPage: React.FC = () => {
         justifyContent: "center",
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "#ffaa00",
+        backgroundColor: "#C4D92E",
       }}
     >
       <div className={styles.loginContainer}>
@@ -230,8 +230,8 @@ const LoginPage: React.FC = () => {
           <Button
             variant="primary"
             style={{
-              backgroundColor: "#ffaa00",
-              borderColor: "#ffaa00",
+              backgroundColor: "#C4D92E",
+              borderColor: "#C4D92E",
               padding: "14px 24px",
             }}
             onClick={handleModalSubmit}
