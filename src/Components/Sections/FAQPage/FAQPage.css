@@ -41,7 +41,7 @@ h1 {
 .faq-item.active .faq-question h3 {
     color: #C4D92E;
     background-color: #000;
-    padding: 6px 18px
+    padding: 6px 0px
 }
 
 .faq-container {
