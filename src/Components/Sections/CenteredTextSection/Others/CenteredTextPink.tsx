@@ -21,7 +21,7 @@ const CenteredTextSectionPink: React.FC = () => {
         <br />
         <span
           style={{
-            backgroundColor: "#065128",
+            backgroundColor: "#000",
             color: "#fff",
             padding: "4px 16px",
             marginTop: 48,

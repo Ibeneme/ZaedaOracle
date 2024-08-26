@@ -63,23 +63,18 @@ const HeroHeader: React.FC = () => {
             Home
           </li>
           <li
-            onClick={() => navigate("/our-services")}
-            className={isActive("/our-services") ? "active-route" : ""}
-          >
-            Our Services
-          </li>
-          <li
-            onClick={() => navigate("/faqs")}
-            className={isActive("/faqs") ? "active-route" : ""}
-          >
-            FAQs
-          </li>
-          <li
             onClick={() => navigate("/about-us")}
             className={isActive("/about-us") ? "active-route" : ""}
           >
             About Us
           </li>
+          <li
+            onClick={() => navigate("/our-services")}
+            className={isActive("/our-services") ? "active-route" : ""}
+          >
+            Our Services
+          </li>
+
           <li
             onClick={() => navigate("/our-team")}
             className={isActive("/our-team") ? "active-route" : ""}
@@ -103,6 +98,12 @@ const HeroHeader: React.FC = () => {
             //className={isActive("/") ? "active-route" : ""}
           >
             Contact Us
+          </li>
+          <li
+            onClick={() => navigate("/faqs")}
+            className={isActive("/faqs") ? "active-route" : ""}
+          >
+            FAQs
           </li>
         </ul>
         {isModalOpen && <Modal onClose={closeModal} />}

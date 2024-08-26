@@ -15,7 +15,10 @@ const CenteredTextSection: React.FC = () => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <section className="centered-text-section">
+    <section
+      className="centered-text-section"
+      style={{ backgroundColor: "#C4D92E" }}
+    >
       <h3 className="section-header">
         Your Trusted Partner
         <br />
@@ -25,7 +28,7 @@ const CenteredTextSection: React.FC = () => {
       <p className="section-paragraph">
         Established in 2023, Zaeda Oracle Limited specialises in providing
         comprehensive legal and business management services to businesses and
-        individuals in the music, film, fashion and in between of the creative
+        individuals in the music, film, fashion and In-between of the creative
         industries, as well as the general public. Our team of 10+ years of
         experienced lawyers and managers are dedicated to safeguarding your
         interests and ensuring your success.

@@ -1,8 +1,9 @@
 .footer {
-    background-color: #030928;
+    background-color: #000;
     color: #fff;
     padding: 120px 0;
     text-align: center;
+    border-top: 3px solid #C4D92E
 }
 
 .footer-content {

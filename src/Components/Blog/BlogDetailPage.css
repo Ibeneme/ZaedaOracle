@@ -63,14 +63,14 @@
 .subscribe-form button {
   padding: 10px;
   border: none;
-  background-color: #0075FF;
+  background-color: #000000;
   color: #ffffff;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .subscribe-form button:hover {
-  background-color: #0075FF;
+  background-color: #000000;
 }
 
 .share-box {
@@ -93,10 +93,10 @@
 }
 
 .social-icons a {
-  color: #0075FF;
+  color: #000000;
   font-size: 18px;
   text-decoration: none;
-  background-color: #0075FF12;
+  background-color: #00000012;
   padding: 12px;
   border-radius: 12px;
   height: 24px;

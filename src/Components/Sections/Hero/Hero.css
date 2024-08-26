@@ -57,11 +57,11 @@
 }
 
 .hero-navbar li.active-route {
-    color: #FFDB1B;
+    color: #C4D92E;
     font-weight: 900;
     padding-left: 0px;
     padding-right: 0px;
-    border-bottom: 1.3px solid #FFDB1B;
+    border-bottom: 1.3px solid #C4D92E;
 
     /* Yellow color for the active route */
 }

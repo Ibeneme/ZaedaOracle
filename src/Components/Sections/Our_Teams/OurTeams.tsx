@@ -85,8 +85,13 @@ const OurTeam: React.FC = () => {
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{
+                  backgroundColor: "#000",
+                  color: "#C4D92E",
+                  padding: `4px 12px`,
+                }}
               >
-                LinkedIn
+                View LinkedIn
               </a>
               <p>{member.bio}</p>
             </div>

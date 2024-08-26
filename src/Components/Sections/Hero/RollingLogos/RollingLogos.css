@@ -6,9 +6,11 @@
   color: #fff;
   height: 120px;
   /* Adjust height as needed */
-  background-color: #0075FF;
+  background-color: #000;
+  border-top: 4px solid #C4D92E;
+  border-bottom: 4px solid #C4D92E;
   /* Background color */
-  
+
 }
 
 .rolling-logos-wrapper {

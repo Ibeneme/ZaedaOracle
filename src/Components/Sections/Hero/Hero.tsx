@@ -15,7 +15,7 @@ import WhyChooseUsG from "../Why_Choose_us/G/WhyChooseUsG";
 
 const Hero: React.FC = () => {
   const heroTitle = "Zaeda Oracle Limited";
-  const contentTexts = "Navigating the Music Business in ";
+  const contentTexts = "Navigating the creative economy in ";
   const [slideClass, setSlideClass] = useState("hero-slide");
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
               {contentTexts}{" "}
               <span
                 style={{
-                  backgroundColor: "#0075FF",
+                  backgroundColor: "#C4D92E",
                   color: "#fff",
                   padding: `0px 5px`,
                 }}

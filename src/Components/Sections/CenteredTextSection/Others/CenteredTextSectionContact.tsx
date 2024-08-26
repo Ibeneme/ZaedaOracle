@@ -13,13 +13,15 @@ const CenteredTextSectionContact: React.FC = () => {
     <section
       className="centered-text-section"
       style={{
-        backgroundColor: "antiquewhite",
+        backgroundColor: "#000",
         marginBottom: -120,
         paddingBottom: 360,
       }}
     >
-      <h3 className="section-header">Contact us</h3>
-      <p className="section-paragraph">
+      <h3 className="section-header" style={{ color: "#C4D92E" }}>
+        Contact us
+      </h3>
+      <p className="section-paragraph" style={{ color: "#C4D92E" }}>
         Have questions or need legal assistance? Fill out our contact form and
         our team will get back to you promptly.
       </p>
@@ -30,11 +32,12 @@ const CenteredTextSectionContact: React.FC = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: 12,
+            color: "#fff",
           }}
         >
           <div
             style={{
-              backgroundColor: "#030928",
+              backgroundColor: "#ffffff45",
               padding: 12,
               borderRadius: 4,
               width: "fit-content",
@@ -43,7 +46,10 @@ const CenteredTextSectionContact: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <FaMapMarkerAlt className="contact-icon-div" />{" "}
+            <FaMapMarkerAlt
+              className="contact-icon-div"
+              style={{ color: "#fff" }}
+            />{" "}
           </div>
           110 W Randol Mill Road, Suite 240, Arlington, Texas, 76011.
         </p>
@@ -57,7 +63,7 @@ const CenteredTextSectionContact: React.FC = () => {
         >
           <div
             style={{
-              backgroundColor: "#030928",
+              backgroundColor: "#ffffff45",
               padding: 12,
               borderRadius: 4,
               width: "fit-content",
@@ -66,11 +72,14 @@ const CenteredTextSectionContact: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <FaEnvelope className="contact-icon-div" />{" "}
+            <FaEnvelope
+              className="contact-icon-div"
+              style={{ color: "#fff" }}
+            />{" "}
           </div>
           <a
             href="mailto:info@zaedaoracle.com"
-            style={{ fontWeight: 900, color: "#030928" }}
+            style={{ fontWeight: 900, color: "#fff" }}
           >
             info@zaedaoracle.com
           </a>{" "}
@@ -85,7 +94,7 @@ const CenteredTextSectionContact: React.FC = () => {
         >
           <div
             style={{
-              backgroundColor: "#030928",
+              backgroundColor: "#ffffff45",
               padding: 12,
               borderRadius: 4,
               width: "fit-content",
@@ -94,17 +103,21 @@ const CenteredTextSectionContact: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <FaPhone className="contact-icon-div" />{" "}
+            <FaPhone className="contact-icon-div" style={{ color: "#fff" }} />{" "}
           </div>
           <a
-            href="tel:+234111848399"
-            style={{ fontWeight: 900, color: "#030928" }}
+            href="tel:+2348039415693"
+            style={{ fontWeight: 900, color: "#fff" }}
           >
-            +234111848399
+            +2348039415693
           </a>{" "}
         </p>
       </div>
-      <button className="cta-button" onClick={openModal}>
+      <button
+        className="cta-button"
+        onClick={openModal}
+        style={{ backgroundColor: "#C4D92E", border: `1px solid #C4D92E` }}
+      >
         Contact Us
       </button>
       {isModalOpen && <Modal onClose={closeModal} />}

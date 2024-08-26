@@ -11,7 +11,7 @@ const WhyChooseUsE: React.FC = () => {
           Legal Services for the
           <span
             style={{
-              backgroundColor: "#ffaa00",
+              backgroundColor: "#000",
               color: "#fff",
               padding: "0px 4px",
               marginLeft: 8,
@@ -22,21 +22,21 @@ const WhyChooseUsE: React.FC = () => {
         </h2>
         <ul>
           <li>
-            <strong style={{ color: "#ffaa00" }}>
+            <strong style={{ color: "#000" }}>
               Copyright and Trademark Registration:
             </strong>
             We help you secure your creative works and brand identity through
             thorough copyright and trademark registration services.
           </li>
           <li>
-            <strong style={{ color: "#ffaa00" }}>
+            <strong style={{ color: "#000" }}>
               Business Formation and Management:
             </strong>
             We provide advice and source opportunities that will expand your
             brand.
           </li>
           <li>
-            <strong style={{ color: "#ffaa00" }}>
+            <strong style={{ color: "#000" }}>
               Licensing and Merchandising Agreements:
             </strong>
             Our team drafts and negotiates licensing and merchandising
@@ -44,12 +44,12 @@ const WhyChooseUsE: React.FC = () => {
             assets.
           </li>
           <li>
-            <strong style={{ color: "#ffaa00" }}>Talent Representation:</strong>
+            <strong style={{ color: "#000" }}>Talent Representation:</strong>
             We provide legal representation for talents and creatives, ensuring
             their contracts are fair and their rights are protected.
           </li>
           <li>
-            <strong style={{ color: "#ffaa00" }}>
+            <strong style={{ color: "#000" }}>
               Litigation and Dispute Resolution:
             </strong>
             Our experts handle legal disputes with professionalism and

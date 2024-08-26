@@ -135,6 +135,7 @@ const Modal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                 type="submit"
                 variant="primary"
                 disabled={status === "loading"}
+                style={{ backgroundColor: "#000", border: "1px solid #000" }}
               >
                 Submit
               </Button>

@@ -60,7 +60,7 @@ const Testimonials: React.FC = () => {
     <section className="testimonials">
       <h2
         className="section-header"
-        style={{ color: "#fff", marginBottom: 48 }}
+        style={{ color: "#C4D92E", marginBottom: 48 }}
       >
         Testimonials
       </h2>

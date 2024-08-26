@@ -26,7 +26,10 @@ const ContactUs: React.FC = () => {
   });
 
   return (
-    <section className="contact-us-section">
+    <section
+      className="contact-us-section"
+      style={{ backgroundColor: "#C4D92E" }}
+    >
       <div className="contact-info">
         <h2 className="contact-info-h2">Contact Us</h2>
         <div className="contact-item">
