@@ -60,7 +60,7 @@ const LegalInsights: React.FC = () => {
 
   const formatDate = (date?: Date) => {
     if (!date) return "Date not available";
-    return format(date, "do MMMM yyyy, hh:mm a", { locale: enGB });
+    return format(date, "do MMMM yyyy", { locale: enGB });
   };
 
   if (status === "loading") {
