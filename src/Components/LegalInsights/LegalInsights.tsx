@@ -90,57 +90,60 @@ const LegalInsights: React.FC = () => {
       <br />
       <div style={{ padding: "150px 0px", backgroundColor: "#f4f4f4" }}>
         <div className="legal-insights-grid">
-          {insights?.map((insight) => (
-            <div
-              onClick={() => handleReadMore(insight)}
-              key={insight?._id}
-              style={{ display: "flex", flexDirection: "column" }}
-            >
+          {insights
+            ?.slice()
+            ?.reverse()
+            ?.map((insight) => (
               <div
-                className="legal-insight-item"
-                style={{
-                  backgroundImage: `url(${insight?.image || fozaImage})`,
-                  borderRadius: 32,
-                }}
-              ></div>
-
-              <div
-                style={{
-                  padding: 16,
-                  backgroundColor: "#fff",
-                  borderRadius: 32,
-                  marginTop: 8,
-                }}
+                onClick={() => handleReadMore(insight)}
+                key={insight?._id}
+                style={{ display: "flex", flexDirection: "column" }}
               >
-                <h1 style={{ textAlign: "left", fontSize: 24 }}>
-                  {insight?.title}
-                </h1>
-                <p>
-                  {formatDescription(insight?.description?.slice(0, 180))}
-                  {formatDescription(
-                    insight?.description?.length > 180 ? "..." : ""
-                  )}
-                </p>
-                <p>
-                  <strong>Created:</strong> {formatDate(insight?.dateCreated)}
-                </p>
-
-                <button
-                  onClick={() => handleReadMore(insight)}
+                <div
+                  className="legal-insight-item"
                   style={{
-                    backgroundColor: "transparent",
-                    color: "green",
-                    padding: 0,
-                    margin: 0,
-                    marginBottom: 24,
-                    marginTop: 16,
+                    backgroundImage: `url(${insight?.image || fozaImage})`,
+                    borderRadius: 32,
+                  }}
+                ></div>
+
+                <div
+                  style={{
+                    padding: 16,
+                    backgroundColor: "#fff",
+                    borderRadius: 32,
+                    marginTop: 8,
                   }}
                 >
-                  Read More <FaChevronRight />
-                </button>
+                  <h1 style={{ textAlign: "left", fontSize: 24 }}>
+                    {insight?.title}
+                  </h1>
+                  <p>
+                    {formatDescription(insight?.description?.slice(0, 180))}
+                    {formatDescription(
+                      insight?.description?.length > 180 ? "..." : ""
+                    )}
+                  </p>
+                  <p>
+                    <strong>Created:</strong> {formatDate(insight?.dateCreated)}
+                  </p>
+
+                  <button
+                    onClick={() => handleReadMore(insight)}
+                    style={{
+                      backgroundColor: "transparent",
+                      color: "green",
+                      padding: 0,
+                      margin: 0,
+                      marginBottom: 24,
+                      marginTop: 16,
+                    }}
+                  >
+                    Read More <FaChevronRight />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
