@@ -188,7 +188,21 @@ const LegalInsightsComponent: React.FC = () => {
     }
   };
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading")
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
   if (status === "failed") return <div>Error: {error}</div>;
 
   return (
@@ -204,44 +218,47 @@ const LegalInsightsComponent: React.FC = () => {
       </div>
 
       <div className={styles.container}>
-        {Array.isArray(insights) && insights.length > 0 ? (
-          insights.map((insight) => (
-            <div key={insight._id} className={styles.item}>
-              <img
-                src={insight.image}
-                alt={insight.title}
-                //className={styles.image}
-                style={{ height: 450 }}
-              />
-              <div className={styles.icons}>
-                <div className={styles.iconsdiv}>
-                  <FaEye
-                    className={`${styles.icon} ${styles.viewbutton}`}
-                    onClick={() => handleView(insight)}
-                  />
+        {Array?.isArray(insights) && insights.length > 0 ? (
+          insights
+            ?.slice()
+            ?.reverse()
+            ?.map((insight) => (
+              <div key={insight._id} className={styles.item}>
+                <img
+                  src={insight.image}
+                  alt={insight.title}
+                  //className={styles.image}
+                  style={{ height: 450 }}
+                />
+                <div className={styles.icons}>
+                  <div className={styles.iconsdiv}>
+                    <FaEye
+                      className={`${styles.icon} ${styles.viewbutton}`}
+                      onClick={() => handleView(insight)}
+                    />
+                  </div>
+                  <div className={styles.iconsdiv}>
+                    <FaEdit
+                      className={`${styles.icon} ${styles.editicon}`}
+                      onClick={() => handleEdit(insight)}
+                    />
+                  </div>
+                  <div className={styles.iconsdivdelete}>
+                    <FaTrash
+                      className={`${styles.icon} ${styles.deleteicon}`}
+                      onClick={() => handleDelete(insight)}
+                    />
+                  </div>
                 </div>
-                <div className={styles.iconsdiv}>
-                  <FaEdit
-                    className={`${styles.icon} ${styles.editicon}`}
-                    onClick={() => handleEdit(insight)}
-                  />
-                </div>
-                <div className={styles.iconsdivdelete}>
-                  <FaTrash
-                    className={`${styles.icon} ${styles.deleteicon}`}
-                    onClick={() => handleDelete(insight)}
-                  />
+                <div className={styles.title}>{insight.title}</div>
+                <div className={styles.description}>
+                  {formatDescription(insight.description.substring(0, 180))}
+                  {formatDescription(
+                    insight.description.length > 180 ? "..." : ""
+                  )}
                 </div>
               </div>
-              <div className={styles.title}>{insight.title}</div>
-              <div className={styles.description}>
-                {formatDescription(insight.description.substring(0, 180))}
-                {formatDescription(
-                  insight.description.length > 180 ? "..." : ""
-                )}
-              </div>
-            </div>
-          ))
+            ))
         ) : (
           <div>No insights available</div>
         )}
@@ -325,6 +342,7 @@ const LegalInsightsComponent: React.FC = () => {
                     onChange={(e) => setNewTitle(e.target.value)}
                   />
                 </Form.Group>
+                <br />
                 <Form.Group controlId="formDescription">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
@@ -347,7 +365,7 @@ const LegalInsightsComponent: React.FC = () => {
                     <img
                       src={newImagePreview}
                       alt="Preview"
-                      className={styles.imagePreview}
+                      style={{ width: "100%", marginBottom: 24 }}
                     />
                   )}
                 </Form.Group>

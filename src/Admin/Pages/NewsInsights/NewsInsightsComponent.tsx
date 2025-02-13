@@ -11,6 +11,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import styles from "./NewsInsights.module.css"; // Make sure to update the styles import path
 import Loader from "../../../Components/Loader/Loader";
+import { formatDescription } from "../LegalInsights/LegalInsightsComponent";
 
 const NewsInsightsComponent: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -163,7 +164,21 @@ const NewsInsightsComponent: React.FC = () => {
     }
   };
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading")
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
   if (status === "failed") return <div>Error: {error}</div>;
 
   return (
@@ -179,42 +194,47 @@ const NewsInsightsComponent: React.FC = () => {
       </div>
 
       <div className={styles.container}>
-        {Array.isArray(insights) && insights.length > 0 ? (
-          insights.map((insight) => (
-            <div key={insight._id} className={styles.item}>
-              <img
-                src={insight.image}
-                alt={insight.title}
-                className={styles.image}
-              />
-              <div className={styles.icons}>
-                <div className={styles.iconsdiv}>
-                  <FaEye
-                    className={`${styles.icon} ${styles.viewbutton}`}
-                    onClick={() => handleView(insight)}
-                  />
+        {Array.isArray(insights) && insights?.length > 0 ? (
+          insights
+            ?.slice()
+            ?.reverse()
+            ?.map((insight) => (
+              <div key={insight?._id} className={styles.item}>
+                <img
+                  src={insight.image}
+                  alt={insight.title}
+                  style={{ height: 450 }}
+                />
+                <div className={styles.icons}>
+                  <div className={styles.iconsdiv}>
+                    <FaEye
+                      className={`${styles.icon} ${styles.viewbutton}`}
+                      onClick={() => handleView(insight)}
+                    />
+                  </div>
+                  <div className={styles.iconsdiv}>
+                    <FaEdit
+                      className={`${styles.icon} ${styles.editicon}`}
+                      onClick={() => handleEdit(insight)}
+                    />
+                  </div>
+                  <div className={styles.iconsdivdelete}>
+                    <FaTrash
+                      className={`${styles.icon} ${styles.deleteicon}`}
+                      onClick={() => handleDelete(insight)}
+                    />
+                  </div>
                 </div>
-                <div className={styles.iconsdiv}>
-                  <FaEdit
-                    className={`${styles.icon} ${styles.editicon}`}
-                    onClick={() => handleEdit(insight)}
-                  />
-                </div>
-                <div className={styles.iconsdivdelete}>
-                  <FaTrash
-                    className={`${styles.icon} ${styles.deleteicon}`}
-                    onClick={() => handleDelete(insight)}
-                  />
+                <div className={styles.title}>{insight.title}</div>
+                <div className={styles.description}>
+                  {formatDescription(
+                    insight?.content?.length > 180
+                      ? `${insight?.content?.substring(0, 180)}...`
+                      : insight?.content
+                  )}
                 </div>
               </div>
-              <div className={styles.title}>{insight.title}</div>
-              <div className={styles.description}>
-                {insight.content.length > 180
-                  ? `${insight.content.substring(0, 180)}...`
-                  : insight.content}
-              </div>
-            </div>
-          ))
+            ))
         ) : (
           <div>No insights available</div>
         )}
@@ -265,8 +285,9 @@ const NewsInsightsComponent: React.FC = () => {
             <img
               src={selectedInsight?.image}
               alt={selectedInsight?.title}
-              className={styles.imagePreview}
+              style={{ width: "100%", marginBottom: 24 }}
             />
+            <br />
             <p>{selectedInsight?.content}</p>
           </Modal.Body>
           <Modal.Footer>
@@ -301,7 +322,7 @@ const NewsInsightsComponent: React.FC = () => {
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows={3}
+                    rows={25}
                     placeholder="Enter description"
                     value={newDescription}
                     onChange={(e) => setNewDescription(e.target.value)}
@@ -320,7 +341,7 @@ const NewsInsightsComponent: React.FC = () => {
                     <img
                       src={newImagePreview}
                       alt="Preview"
-                      className={styles.imagePreview}
+                      style={{ width: "100%", marginBottom: 24 }}
                     />
                   )}
                 </Form.Group>
@@ -340,7 +361,6 @@ const NewsInsightsComponent: React.FC = () => {
                 {" "}
                 {showErr === "" ? "" : showErr}
               </p>
-      
 
               <div
                 style={{
