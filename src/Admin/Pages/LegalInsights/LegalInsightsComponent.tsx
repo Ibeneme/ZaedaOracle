@@ -12,6 +12,17 @@ import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import styles from "./LegalInsights.module.css";
 import Loader from "../../../Components/Loader/Loader";
 
+export const formatDescription = (text: string) => {
+  return text
+    ?.split(/(\*\*.*?\*\*)/)
+    ?.map((part, index) =>
+      part?.startsWith("**") && part?.endsWith("**") ? (
+        <strong key={index}>{part?.slice(2, -2)}</strong>
+      ) : (
+        part
+      )
+    );
+};
 const LegalInsightsComponent: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { insights, status, error } = useSelector(
@@ -36,6 +47,17 @@ const LegalInsightsComponent: React.FC = () => {
   const [loading, setLoading] = useState(false); // State for loading
   const [deleteLoading, setDeleteLoading] = useState(false); // State for delete loading
   const [updateLoading, setUpdateLoading] = useState(false); // State for update loading
+  const [showErr, setShowErr] = useState("");
+
+  const fetch = () => {
+    dispatch(fetchLegalInsights())
+      .then((response) => {
+        console.log("Legal insights fetched successfully:", response);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch legal insights:", err);
+      });
+  };
 
   useEffect(() => {
     dispatch(fetchLegalInsights())
@@ -93,9 +115,15 @@ const LegalInsightsComponent: React.FC = () => {
           image: imageFile instanceof File ? imageFile : undefined, // Ensure imageFile is of type File
         })
       )
-        .then(() => {
-          setEditing(false);
-          setUpdateLoading(false); // Hide loader
+        .then((response) => {
+          if (
+            response.payload.message === "News insight updated successfully."
+          ) {
+            console.log(response, "resposuccessfullysuccessfullynse");
+            fetch();
+            setEditing(false);
+            setUpdateLoading(false); // Hide loader
+          }
         })
         .catch((error) => {
           console.error("Failed to update legal insight:", error);
@@ -131,7 +159,9 @@ const LegalInsightsComponent: React.FC = () => {
   };
 
   const handleCreate = () => {
+    setShowErr("");
     if (newTitle && newDescription && newImage) {
+      setShowErr("");
       setLoading(true); // Show loader
       dispatch(
         createLegalInsight({
@@ -153,6 +183,7 @@ const LegalInsightsComponent: React.FC = () => {
           setLoading(false); // Hide loader on error
         });
     } else {
+      setShowErr("Please fill all fields and select an image.");
       console.error("Please fill all fields and select an image.");
     }
   };
@@ -179,7 +210,8 @@ const LegalInsightsComponent: React.FC = () => {
               <img
                 src={insight.image}
                 alt={insight.title}
-                className={styles.image}
+                //className={styles.image}
+                style={{ height: 450 }}
               />
               <div className={styles.icons}>
                 <div className={styles.iconsdiv}>
@@ -203,8 +235,10 @@ const LegalInsightsComponent: React.FC = () => {
               </div>
               <div className={styles.title}>{insight.title}</div>
               <div className={styles.description}>
-                {insight.description.substring(0, 180)}
-                {insight.description.length > 180 ? "..." : ""}
+                {formatDescription(insight.description.substring(0, 180))}
+                {formatDescription(
+                  insight.description.length > 180 ? "..." : ""
+                )}
               </div>
             </div>
           ))
@@ -258,10 +292,11 @@ const LegalInsightsComponent: React.FC = () => {
             <img
               src={selectedInsight?.image}
               alt={selectedInsight?.title}
-              className={styles.image}
+              style={{ width: "100%", marginBottom: 24 }}
             />
+            <br />
             <div className={styles.viewcontent}>
-              {selectedInsight?.description}
+              {formatDescription(selectedInsight?.description)}
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -294,11 +329,12 @@ const LegalInsightsComponent: React.FC = () => {
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows={3}
+                    rows={25}
                     placeholder="Enter description"
                     value={newDescription}
                     onChange={(e) => setNewDescription(e.target.value)}
                   />
+                  <br />
                 </Form.Group>
                 <Form.Group controlId="formImage">
                   <Form.Label>Image</Form.Label>
@@ -319,6 +355,47 @@ const LegalInsightsComponent: React.FC = () => {
             )}
           </Modal.Body>
           <Modal.Footer>
+            <div
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+              }}
+            >
+              <p style={{ color: "#ff0000", fontSize: 14 }}>
+                {" "}
+                {showErr === "" ? "" : showErr}
+              </p>
+
+              <div
+                style={{
+                  gap: 12,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowCreateModal(false)}
+                  disabled={loading} // Disable button while loading
+                >
+                  Close
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={handleCreate}
+                  disabled={loading} // Disable button while loading
+                >
+                  Create
+                </Button>
+              </div>
+            </div>
+
+            {/* <p style={{ color: "#ff0000", fontSize: 14 }}>
+              {" "}
+              {showErr === "" ? "" : showErr}
+            </p>
             <Button
               variant="secondary"
               onClick={() => setShowCreateModal(false)}
@@ -332,7 +409,7 @@ const LegalInsightsComponent: React.FC = () => {
               disabled={loading} // Disable button while loading
             >
               Create
-            </Button>
+            </Button> */}
           </Modal.Footer>
         </Modal>
 
@@ -359,11 +436,12 @@ const LegalInsightsComponent: React.FC = () => {
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows={3}
+                    rows={25}
                     placeholder="Enter description"
                     value={editedDescription}
                     onChange={(e) => setEditedDescription(e.target.value)}
                   />
+                  <br />
                 </Form.Group>
                 <Form.Group controlId="formImage">
                   <Form.Label>Image</Form.Label>
@@ -373,11 +451,13 @@ const LegalInsightsComponent: React.FC = () => {
                     onChange={(e) => handleImageChange(e as any)}
                   />
                   {editedImagePreview && (
-                    <img
-                      src={editedImagePreview}
-                      alt="Preview"
-                      className={styles.imagePreview}
-                    />
+                    <div onClick={(e) => handleImageChange(e as any)}>
+                      <img
+                        src={editedImagePreview}
+                        alt="Preview"
+                        className={styles.imagePreview}
+                      />
+                    </div>
                   )}
                 </Form.Group>
               </Form>

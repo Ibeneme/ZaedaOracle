@@ -32,8 +32,8 @@ const PasswordResetSuccessPage: React.FC = () => {
           onClick={handleClose}
           className={styles.okButton}
           style={{
-            backgroundColor: "#ffaa00",
-            borderColor: "#ffaa00",
+            backgroundColor: "#C4D92E",
+            borderColor: "#C4D92E",
             padding: "14px 24px",
             width: '100%'
           }}

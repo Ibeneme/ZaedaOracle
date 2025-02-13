@@ -10,6 +10,8 @@ import { FaChevronRight } from "react-icons/fa";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { InsightType } from "./LegalInsights.types";
+import Loader from "../Loader/Loader";
+import { formatDescription } from "../../Admin/Pages/LegalInsights/LegalInsightsComponent";
 
 const LegalInsights: React.FC = () => {
   const navigate = useNavigate();
@@ -21,13 +23,9 @@ const LegalInsights: React.FC = () => {
   const overlayRefs = useRef<Map<string, HTMLDivElement | null>>(new Map());
 
   useEffect(() => {
-    dispatch(fetchLegalInsights())
-      .then((response) => {
-        console.log(response, "response");
-      })
-      .catch((err) => {
-        setLocalError(err.message || "An error occurred");
-      });
+    dispatch(fetchLegalInsights()).catch((err) => {
+      setLocalError(err.message || "An error occurred");
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -50,11 +48,12 @@ const LegalInsights: React.FC = () => {
       overlayRefs.current.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
+      observer.disconnect();
     };
   }, [dispatch]);
 
   const handleReadMore = (insight: InsightType) => {
-    navigate(`/legal-insight-details`, {
+    navigate(`/legal-insight-details/${insight?._id}`, {
       state: { insight },
     });
   };
@@ -63,50 +62,79 @@ const LegalInsights: React.FC = () => {
     if (!date) return "Date not available";
     return format(date, "do MMMM yyyy, hh:mm a", { locale: enGB });
   };
+
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
   }
 
   if (localError || error) {
-    return <div>Error: {localError || error}</div>;
+    return <div className="error-message">Error: {localError || error}</div>;
   }
 
   return (
     <div>
       <BlogHero title="Legal Insights" />
       <br />
-      <div style={{ padding: "150px 0px" }}>
+      <div style={{ padding: "150px 0px", backgroundColor: "#f4f4f4" }}>
         <div className="legal-insights-grid">
           {insights.map((insight) => (
             <div
+              onClick={() => handleReadMore(insight)}
               key={insight._id}
-              className="legal-insight-item"
-              style={{ backgroundImage: `url(${insight.image || fozaImage})` }}
+              style={{ display: "flex", flexDirection: "column" }}
             >
               <div
-                className="overlay"
-                ref={(el) => {
-                  if (el) {
-                    overlayRefs.current.set(insight._id, el);
-                  } else {
-                    overlayRefs.current.delete(insight._id);
-                  }
+                className="legal-insight-item"
+                style={{
+                  backgroundImage: `url(${insight?.image || fozaImage})`,
+                  borderRadius: 32,
+                }}
+              ></div>
+
+              <div
+                style={{
+                  padding: 16,
+                  backgroundColor: "#fff",
+                  borderRadius: 32,
+                  marginTop: 8,
                 }}
               >
-                <h1>{insight.title}</h1>
+                <h1 style={{ textAlign: "left", fontSize: 24 }}>
+                  {insight.title}
+                </h1>
                 <p>
-                  {insight.description.slice(0, 180)}
-                  {insight.description.length > 180 ? "..." : ""}
+                  {formatDescription(insight.description.slice(0, 180))}
+                  {formatDescription(
+                    insight.description.length > 180 ? "..." : ""
+                  )}
                 </p>
                 <p>
                   <strong>Created:</strong> {formatDate(insight.dateCreated)}
                 </p>
-                <p>
-                  <strong>Updated:</strong> {formatDate(insight.dateUpdated)}
-                </p>
+
                 <button
-                  className="read-more-button"
                   onClick={() => handleReadMore(insight)}
+                  style={{
+                    backgroundColor: "transparent",
+                    color: "green",
+                    padding: 0,
+                    margin: 0,
+                    marginBottom: 24,
+                    marginTop: 16,
+                  }}
                 >
                   Read More <FaChevronRight />
                 </button>

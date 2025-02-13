@@ -138,7 +138,7 @@ export const updateLegalInsight = createAsyncThunk<
             });
 
             // Return the data from the response
-            return response.data.legalInsight;
+            return response.data;
         } catch (error) {
             if (isAxiosError(error)) {
                 // Handle errors from the server

@@ -24,8 +24,38 @@ import PrivateRoute from "./PrivateRoute"; // Import PrivateRoute
 import "bootstrap/dist/css/bootstrap.min.css";
 import BlogDetailPageById from "./Components/Blog/BlogByID";
 import UnsubscribePage from "./Components/Blog/UnsubscribePage";
+import { useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  useEffect(() => {
+    // Logs every time the effect runs
+
+    let count = 0;
+    const maxAttempts = 7; // 7 requests
+    const interval = 1000; // 1 second
+
+    const fetchData = async () => {
+      try {
+        await axios.get("https://server-9mir.onrender.com");
+      } catch (err) {
+        // No state updates, just silent handling
+      }
+    };
+
+    const intervalId = setInterval(() => {
+      if (count < maxAttempts) {
+        console.log("reload");
+        fetchData();
+        count++;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, interval);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <ScrollToTop />
@@ -143,7 +173,7 @@ function App() {
             </>
           }
         />
-        <Route path="/legal-insight-details" element={<LegalInsightDetail />} />
+        <Route path="/legal-insight-details/:id" element={<LegalInsightDetail />} />
         <Route path="/blog/:id" element={<BlogDetailPage />} />
         <Route
           path="/legal-insights-admin"

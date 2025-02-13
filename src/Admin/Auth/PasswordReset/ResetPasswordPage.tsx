@@ -169,8 +169,8 @@ const ResetPasswordPage: React.FC = () => {
               <div className={styles.formGroupBtndiv}>
                 <Button
                   style={{
-                    backgroundColor: "#ffaa00",
-                    borderColor: "#ffaa00",
+                    backgroundColor: "#C4D92E",
+                    borderColor: "#C4D92E",
                     padding: "14px 24px",
                   }}
                   type="submit"

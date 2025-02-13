@@ -24,6 +24,8 @@ const BlogDetailPageById: React.FC = () => {
     }
   }, [dispatch, id]);
 
+
+  
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");

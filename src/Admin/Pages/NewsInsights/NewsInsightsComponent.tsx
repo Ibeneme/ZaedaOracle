@@ -36,6 +36,7 @@ const NewsInsightsComponent: React.FC = () => {
   const [loading, setLoading] = useState(false); // State for loading
   const [deleteLoading, setDeleteLoading] = useState(false); // State for delete loading
   const [updateLoading, setUpdateLoading] = useState(false); // State for update loading
+  const [showErr, setShowErr] = useState("");
 
   useEffect(() => {
     dispatch(fetchNewsInsights())
@@ -157,6 +158,7 @@ const NewsInsightsComponent: React.FC = () => {
           setLoading(false); // Hide loader on error
         });
     } else {
+      setShowErr("Please fill all fields and select an image.");
       console.error("Please fill all fields and select an image.");
     }
   };
@@ -327,20 +329,43 @@ const NewsInsightsComponent: React.FC = () => {
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => setShowCreateModal(false)}
-              disabled={loading} // Disable button while loading
+            <div
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+              }}
             >
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              onClick={handleCreate}
-              disabled={loading} // Disable button while loading
-            >
-              Create
-            </Button>
+              <p style={{ color: "#ff0000", fontSize: 14 }}>
+                {" "}
+                {showErr === "" ? "" : showErr}
+              </p>
+      
+
+              <div
+                style={{
+                  gap: 12,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                }}
+              >
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowCreateModal(false)}
+                  disabled={loading} // Disable button while loading
+                >
+                  Close
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={handleCreate}
+                  disabled={loading} // Disable button while loading
+                >
+                  Create
+                </Button>
+              </div>
+            </div>
           </Modal.Footer>
         </Modal>
 
